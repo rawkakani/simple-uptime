@@ -32,7 +32,7 @@ Deno.serve(async (req) => {
   const uptime = [];
 
   for await (const entry of entries) {
-    uptime.push(entry);
+    uptime.push(entry.value);
   }
 
   const percentage =
