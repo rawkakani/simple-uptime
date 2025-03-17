@@ -1,7 +1,7 @@
 const kv = await Deno.openKv();
 
 const HOST = Deno.env.get("ECHO_ENDPOINT");
-const TIMEOUT = 250;
+const TIMEOUT = 500;
 
 console.log("Checking uptime of", HOST, "with timeout of", TIMEOUT);
 
@@ -17,18 +17,18 @@ Deno.cron("Uptime Check", "*/1 * * * *", async () => {
   fetch(HOST, { signal: controller.signal })
     .then((res) =>
       // set true if the server is up
-      kv.set(["uptime", Date.now()], res.ok, { expireIn: ONE_DAY }),
+      kv.set(["uptime_status", Date.now()], res.ok, { expireIn: ONE_DAY }),
     )
     .catch((err) =>
       // set false if the server is down
-      kv.set(["uptime", Date.now()], false, { expireIn: ONE_DAY }),
+      kv.set(["uptime_status", Date.now()], false, { expireIn: ONE_DAY }),
     )
     .finally(() => clearTimeout(timeoutId));
 });
 
 Deno.serve(async (req) => {
   // Retrieve today's uptime
-  const entries = kv.list({ prefix: ["uptime"] });
+  const entries = kv.list({ prefix: ["uptime_status"] });
   const uptime = [];
 
   for await (const entry of entries) {
