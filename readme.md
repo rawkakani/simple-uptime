@@ -21,3 +21,4 @@ deno run --env --allow-net --allow-env --unstable-kv --unstable-cron index.js
 - [x] Create a new repositor
 - [ ] Create a history of uptime (main reason: if you miss checking it up today)
 - [ ] Nice uptime status page
+- [ ] log request time averate, (main reason: to understand speed of service)
