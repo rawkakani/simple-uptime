@@ -1,7 +1,7 @@
 const kv = await Deno.openKv();
 
 const HOST = Deno.env.get("ECHO_ENDPOINT");
-const TIMEOUT = 45;
+const TIMEOUT = 5000;
 
 console.log("Checking uptime of", HOST, "with timeout of", TIMEOUT);
 

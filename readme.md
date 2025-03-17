@@ -2,7 +2,7 @@
 
 ### Requirements
 
-- (Deno)[https://deno.com/]
+- [Deno](https://deno.com/)
 
 ### Getting Started
 
