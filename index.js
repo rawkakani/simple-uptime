@@ -15,14 +15,16 @@ Deno.cron("Uptime Check", "*/1 * * * *", async () => {
   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#canceling_a_request
   // uptime check to the echo server
   fetch(HOST, { signal: controller.signal })
-    .then((res) =>
+    .then((res) => {
       // set true if the server is up
-      kv.set(["uptime_status", Date.now()], res.ok, { expireIn: ONE_DAY }),
-    )
-    .catch((err) =>
+      kv.set(["uptime_status", Date.now()], res.ok, { expireIn: ONE_DAY });
+      console.log(res);
+    })
+    .catch((err) => {
       // set false if the server is down
-      kv.set(["uptime_status", Date.now()], false, { expireIn: ONE_DAY }),
-    )
+      kv.set(["uptime_status", Date.now()], false, { expireIn: ONE_DAY });
+      console.log(err);
+    })
     .finally(() => clearTimeout(timeoutId));
 });
 
