@@ -2,7 +2,8 @@ const kv = await Deno.openKv();
 
 const HOST = Deno.env.get("ECHO_ENDPOINT");
 const TIMEOUT = 250;
-console.log("Checking uptime of", HOST);
+
+console.log("Checking uptime of", HOST, "with timeout of", TIMEOUT);
 
 // CRON Job to check every minute if the echo server is up
 Deno.cron("Uptime Check", "*/1 * * * *", async () => {
