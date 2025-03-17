@@ -1,13 +1,14 @@
 const kv = await Deno.openKv();
 
 const HOST = Deno.env.get("ECHO_ENDPOINT");
+console.log("Checking uptime of", HOST);
 
 // CRON Job to check every minute if the echo server is up
 Deno.cron("Uptime Check", "*/1 * * * *", async () => {
   const ONE_DAY = 24 * 60 * 60 * 1000;
   const controller = new AbortController();
   // timeout the request after 5 seconds
-  const timeoutId = setTimeout(() => controller.abort(), 5000);
+  const timeoutId = setTimeout(() => controller.abort(), 250);
 
   // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#canceling_a_request
   // uptime check to the echo server
