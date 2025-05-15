@@ -41,5 +41,14 @@ Deno.serve(async (req) => {
   const percentage =
     (uptime.filter((value) => value).length / uptime.length) * 100;
 
-  return new Response(percentage);
+
+
+     const data = await Deno.readFile("index.html");
+     let html = new TextDecoder().decode(data);
+     html = html.replace("{percent}", percentage);
+
+    return new Response(html, {
+        headers: { "content-type": "text/html; charset=utf-8" },
+    });
+ 
 });

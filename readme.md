@@ -13,7 +13,7 @@
 ### How to run
 
 ```bash
-deno run --env --allow-net --allow-env --unstable-kv --unstable-cron index.js
+deno run --env --allow-net --allow-env --unstable-kv --unstable-cron --allow-read index.js
 ```
 
 ### Roadmap
